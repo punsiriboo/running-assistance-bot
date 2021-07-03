@@ -1,0 +1,98 @@
+{
+    "to": "<:user_id>",
+    "messages": [{
+        "type": "flex",
+        "altText": "Please select translation language",
+        "contents": {
+            "type": "bubble",
+            "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [{
+                        "type": "text",
+                        "text": "Running recorded",
+                        "weight": "bold",
+                        "size": "lg",
+                        "contents": []
+                    },
+                    {
+                        "type": "box",
+                        "layout": "vertical",
+                        "spacing": "sm",
+                        "margin": "lg",
+                        "contents": [{
+                                "type": "box",
+                                "layout": "baseline",
+                                "spacing": "sm",
+                                "contents": [{
+                                        "type": "text",
+                                        "text": "Run",
+                                        "size": "sm",
+                                        "color": "#AAAAAA",
+                                        "flex": 1,
+                                        "contents": []
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "<:distance>",
+                                        "size": "sm",
+                                        "color": "#666666",
+                                        "flex": 5,
+                                        "wrap": true,
+                                        "contents": []
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "box",
+                                "layout": "baseline",
+                                "spacing": "sm",
+                                "contents": [{
+                                        "type": "text",
+                                        "text": "Pace",
+                                        "size": "sm",
+                                        "color": "#AAAAAA",
+                                        "flex": 1,
+                                        "contents": []
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "<:pace>",
+                                        "size": "sm",
+                                        "color": "#666666",
+                                        "flex": 5,
+                                        "wrap": true,
+                                        "contents": []
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "box",
+                                "layout": "baseline",
+                                "spacing": "sm",
+                                "contents": [{
+                                        "type": "text",
+                                        "text": "Time",
+                                        "size": "sm",
+                                        "color": "#AAAAAA",
+                                        "flex": 1,
+                                        "contents": []
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "<:time>",
+                                        "size": "sm",
+                                        "color": "#666666",
+                                        "flex": 5,
+                                        "wrap": true,
+                                        "contents": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }]
+}
