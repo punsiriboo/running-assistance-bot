@@ -3,9 +3,10 @@ from linebot import (LineBotApi, WebhookParser)
 from linebot.models import (MessageEvent, TextMessage, TextSendMessage, StickerSendMessage)
 from system import Configurator
 from requester import Requester
-from datastore import DatastoreClient
+from db import DatastoreClient
 from line import LineResponse
 from ocr_utils import OCRUtils
+from keywords import KeywordsHandler
 
 
 configurator = Configurator("private/config.json")
@@ -14,6 +15,7 @@ service_requester = Requester(configurator)
 line = LineResponse(configurator)
 line_bot_api = LineBotApi(configurator.get('line.access_token'))
 parser = WebhookParser(configurator.get('line.channel_secret'))
+keywords_handler = KeywordsHandler(configurator)
 
 def handle_message(request):
     body = request.get_data(as_text=True)
@@ -28,12 +30,20 @@ def handle_message(request):
 
             if event.message.type == "text":
                 message_text = event.message.text
-                service_requester.post_dialogflow(request)
+                
+                if message_text.lower().startswith(('https://connect.garmin.com/modern/activity/')):
+                    #extract running stat from Garmin
+                    pass
+                elif message_text.lower().startswith(('https://strava.app.link/activity/')):
+                    #extract running stat from Strava
+                    pass
+                else:
+                    service_requester.post_dialogflow(request)
                     
             if event.message.type == "image":
                 message_id = event.message.id
                 ocr_utils = OCRUtils(configurator)
-                response = ocr_utils.post_ocr_translation(user_id, message_id) 
+                response = ocr_utils.line_ocr_and_translate(message_id, user_id) 
                 line.push(data=response)
 
             if event.message.type == "sticker":
