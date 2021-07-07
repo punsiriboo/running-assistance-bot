@@ -3,19 +3,19 @@ from linebot import (LineBotApi, WebhookParser)
 from linebot.models import (MessageEvent, TextMessage, TextSendMessage, StickerSendMessage)
 from system import Configurator
 from requester import Requester
-from db import DatastoreClient
+from db import FirestoreClient
 from line import LineResponse
 from ocr_utils import OCRUtils
-from keywords import KeywordsHandler
+import uuid
 
 
 configurator = Configurator("private/config.json")
-datastore = DatastoreClient(configurator)
+db = FirestoreClient(configurator)
 service_requester = Requester(configurator)
-line = LineResponse(configurator)
+line_response = LineResponse(configurator)
 line_bot_api = LineBotApi(configurator.get('line.access_token'))
 parser = WebhookParser(configurator.get('line.channel_secret'))
-keywords_handler = KeywordsHandler(configurator)
+
 
 def handle_message(request):
     body = request.get_data(as_text=True)
@@ -43,8 +43,9 @@ def handle_message(request):
             if event.message.type == "image":
                 message_id = event.message.id
                 ocr_utils = OCRUtils(configurator)
-                response = ocr_utils.line_ocr_and_translate(message_id, user_id) 
-                line.push(data=response)
+                response, distance, pace, time = ocr_utils.line_ocr_and_translate(message_id, user_id) 
+                db.save_user_running(user_id, distance, pace, time)
+                line_response.push(data=response)
 
             if event.message.type == "sticker":
                 package_id = 11539

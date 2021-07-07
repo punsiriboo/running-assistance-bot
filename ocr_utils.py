@@ -30,6 +30,7 @@ class OCRUtils:
         image_content = self.get_image_content(message_id)
         ocr_document = self.ocr_image(image_content)
         ocr_text = ocr_document.text.strip().replace("\n","")
+        
         distance = re.search('([0-9\.]*\skm)', ocr_text)
         distance = distance.group(1) if distance else ""
 
@@ -45,6 +46,6 @@ class OCRUtils:
         msg = msg.replace('<:distance>', distance.strip())
         msg = msg.replace('<:pace>', pace.strip())
         msg = msg.replace('<:time>', time.strip())     
-        return msg
+        return msg, distance, pace, time
 
         

@@ -1,1 +1,1 @@
-from db.datastore_client import DatastoreClient
+from db.firestore_client import FirestoreClient

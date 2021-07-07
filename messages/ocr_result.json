@@ -2,7 +2,7 @@
     "to": "<:user_id>",
     "messages": [{
         "type": "flex",
-        "altText": "Running Recrorded",
+        "altText": "Running Recorded",
         "contents": {
             "type": "bubble",
             "body": {

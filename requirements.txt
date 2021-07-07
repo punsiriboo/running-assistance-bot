@@ -1,6 +1,6 @@
 line-bot-sdk
 google-auth
-google-cloud-datastore
+google-cloud-firestore
 google-api-python-client
 google-auth-oauthlib
 google-cloud-vision
